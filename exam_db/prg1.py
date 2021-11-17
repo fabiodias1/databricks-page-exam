@@ -14,7 +14,7 @@ for linha in f:
 	if linha.find("Question") != -1:
 		if bol1 == False:
 			lst_options.append(str_a1)
-			dct_temp["alterantives"] = lst_options
+			dct_temp["options"] = lst_options
 			lst_questions.append( dct_temp.copy() )
 		
 		lst_options = []
@@ -50,7 +50,7 @@ for linha in f:
 f.close()
 
 str_json = json.dumps({"questions": lst_questions}, indent=4)
-f = open("euestoes_cert_spark.json", "wt")
+f = open("questoes_cert_spark.json", "wt")
 f.write(str_json)
 f.close()
 
