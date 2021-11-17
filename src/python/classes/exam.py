@@ -1,40 +1,8 @@
 # -*- coding: utf-8 -*-
 
 class Exam():
-    __questions = [{
-        "id":1,
-        "description": "1. Escolha uma alternativa",
-        "options": [
-            "Alternativa A",
-            "Alternativa B",
-            "Alternativa C",
-            "Alternativa D",
-            "Alternativa E"
-        ]
-    }, {
-        "id":2,
-        "description": "2. Escolha uma alternativa",
-        "options": [
-            "Alternativa A",
-            "Alternativa B",
-            "Alternativa C",
-            "Alternativa D",
-            "Alternativa E"
-        ]
-    },{
-        "id":3,
-        "description": "3. Escolha uma alternativa",
-        "options": [
-            "Alternativa A",
-            "Alternativa B",
-            "Alternativa C",
-            "Alternativa D",
-            "Alternativa E"
-        ]
-    }
-    ]
-    __answers1 = [{"id":1, "answer": "B"}, {"id":2, "answer": "C"},  {"id":3, "answer": "C"}]
-    __answers = ["B", "C", "C"]
+    __questions = []
+    __answers = []
     __status = "I"
     __userAnswers = []
     __showedQuestion = []
@@ -78,7 +46,7 @@ class Exam():
         for item in self.__userAnswers:
 
             if item["answer"].upper() == self.__answers[item["id"] - 1]:
-                print("You answered correctly question ", item["id"])
+                #print("You answered correctly question ", item["id"])
                 userTotalHits = userTotalHits + 1
 
         print("Your total hits:", userTotalHits)
@@ -137,6 +105,29 @@ class Exam():
         self.printQuestion()
 
         return True
+
+    def loadQuestionsData(self, str_question_data_location, str_answers_data_location):
+        import json
+        import re
+
+        obj_file = open(str_question_data_location, "rt")
+        str_data = obj_file.read()
+        obj_file.close()
+
+        dct_questions_data = json.loads(str_data)
+
+        self.__questions = dct_questions_data["questions"]
+
+        obj_file = open(str_answers_data_location, "rt")
+        str_data = obj_file.read()
+        obj_file.close()
+
+        str_data = str_data.replace("\r", "")
+        lst_answers = str_data.split("\n")
+
+        lst_answers = list( map(lambda x : re.sub("(\d+)\.\s", "", x), lst_answers  )  )
+
+        self.__answers = lst_answers
 
 #End class        
 

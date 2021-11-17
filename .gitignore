@@ -3,3 +3,6 @@ src/WEB
 
 #Python
 src/python/classes/__pycache__
+
+#Python Questions Data
+src/python/data

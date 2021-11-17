@@ -4,6 +4,8 @@ from classes.exam import Exam
 
 objExam = Exam()
 
+objExam.loadQuestionsData("./data/questions_data.json", "./data/answers.txt")
+
 str_input = ""
 
 objExam.startExam()

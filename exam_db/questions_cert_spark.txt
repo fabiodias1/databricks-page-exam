@@ -98,7 +98,27 @@ notebook environment or in batch
 Question 12
 Which of the following cluster configurations will ensure the completion of a Spark application in
 light of a worker node failure?
-<image>
+
+Scenario #1
+1 Driver & 1 Executor
+- 100 GB and 200 Core per Executor
+* Fixed cluster with one node
+
+Scenario #4
+1 Driver & 2 Executors
+- 50 GB and 100 Core per Executor
+* Fixed cluster with two nodes
+
+Scenario #5
+1 Driver & 4 Executor
+- 25 GB and 50 Core per Executor
+* Fixed cluster with 4 nodes
+
+Scenario #6
+1 Driver & 8 Executor
+- 12.5 GB and 25 Core per Executor
+* Fixed cluster with 8 nodes
+
 Note: each configuration has roughly the same compute power using 100GB of RAM and 200 cores.
 A. Scenario #1
 B. They should all ensure completion because worker nodes are fault-tolerant.
@@ -164,7 +184,16 @@ Question 19
 Which of the following code blocks returns a DataFrame containing all columns from DataFrame
 storesDF except for column sqft and column customerSatisfaction?
 A sample of DataFrame storesDF is below:
-<imagem>
+-------------------------------------------------------------------------------------
+|storeID|open |openDate  |division     |sqft |numberOfEmployees|customerSatisfaction|
+-------------------------------------------------------------------------------------
+|0      |true |1100746394|Utah         |43161|61               |71.1                |
+|1      |true |944572255 |West Virginia|18132|96               |43.46               |
+|2      |false|9254956288|West Virginia|79520|45               |36.93               |
+|3      |true |1397353092|Texas        |47751|78               |47.19               |
+|4      |true |986505057 |Delaware     |81483|95               |25.24               |
+|...    |...  |...       |...          |...  |...              |...                 |
+-------------------------------------------------------------------------------------
 A. storesDF.drop("sqft", "customerSatisfaction")
 B. storesDF.select("storeId", "open", "openDate", "division")
 C. storesDF.select(-col(sqft), -col(customerSatisfaction))
@@ -247,7 +276,17 @@ The code block shown below contains an error. The code block intends to return a
 where column storeCategory from DataFrame storesDF is split at the underscore character
 into column storeValueCategory and column storeSizeCategory. Identify the error.
 A sample of DataFrame storesDF is displayed below:
-<image>
+-------------------------------------------
+|storeID|open |openDate  |storeCategory   |
+-------------------------------------------
+|0      |true |1100746394|VALUE_MEDIUM    |
+|1      |true |944572255 |MAINSTREAM_SMALL|
+|2      |false|925495628 |PREMIUN_LARGE   |
+|3      |true |1397353092|VALUE_MEDIUM    |
+|4      |true |986505057 |VALUE_LARGE     |
+|5      |true |955988614 |PREMIUN_LARGE   |
+|...    |...  |...       |...             |
+-------------------------------------------
 Code block:
 (storesDF.withColumn(
 		"storeValueCategory", col("storeCategory").split("_")[0]
@@ -525,7 +564,16 @@ Note that column openDate is of type integer and represents a date in the UNIX e
 the number of seconds since midnight on January 1st, 1970.
 An example of Java's SimpleDateFormat is "Sunday, Dec 4, 2008 1:05 PM".
 A sample of storesDF is displayed below:
-<imagem>
+--------------------
+|storeID|openDate  |
+--------------------
+|0      |1100746394|
+|1      |1474410343|
+|2      |111661009 |
+|3      |1180035265|
+|4      |1408024997|
+|...    |...       |
+--------------------
 Lines of code:
 1. storesDF.withColumn("openDateString",
 from_unixtime(col("openDate"), simpleDateFormat))
@@ -548,7 +596,16 @@ representation of the month from column openDate fromDataFrame storesDF?
 Note that column openDate is of type integer and represents a date in the UNIX epoch format —
 the number of seconds since midnight on January 1st, 1970.
 A sample of storesDF is displayed below:
-<image>
+--------------------
+|storeID|openDate  |
+--------------------
+|0      |1100746394|
+|1      |1474410343|
+|2      |111661009 |
+|3      |1180035265|
+|4      |1408024997|
+|...    |...       |
+--------------------
 A. storesDF.withColumn("month", getMonth(col("openDate")))
 B. storesDF.withColumn("openTimestamp",
 col("openDate").cast("Timestamp")).withColumn("month",
