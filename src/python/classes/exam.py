@@ -77,7 +77,9 @@ class Exam():
 
         obj_DateTime = datetime.datetime.now()
 
-        if  obj_DateTime.hour > (self.__DateTimeStart.hour + 2):
+        obj_DiffDateTimes = obj_DateTime - self.__DateTimeStart
+
+        if  (obj_DiffDateTimes.total_seconds() / 3600) > 2.0:
             print("Our time is over!")
             self.stopExam()
             return True
