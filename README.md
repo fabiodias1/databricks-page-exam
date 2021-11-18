@@ -10,7 +10,7 @@ Neste momento, somente a versão par ser usada no prompt ou shell está dispoin�
 
 ## Usuários
 
-Para usar o programa é recomendado possuir conhecimentos básicos em Python 3 e Inglês.
+Para usar o programa é recomendado possuir conhecimentos básicos em Python 3, Databricks Community(opcional) e Inglês.
 
 ## Dados da prova
 
@@ -22,7 +22,17 @@ Na pasta `exam_db` contém:
 
 ## Simulados
 
-Assim como na prova real, são um conjunto de 60 questões, o usuário precisa fazer a prova em 2 horas.
+Assim como na prova real, são um conjunto de 60 questões, o usuário precisa fazer a prova em 2 horas.  
+
+### Versão Notebook do Databricks
+
+Na pasta `src/notebooks` existem 2 arquivos referentes ao simulado, um arquivo Jupyter Notebook com 60 perguntas originárias das provas de certificação para consulta e outro arquivo no formato dbc.
+
+O arquivo dbc  pode ser importado no ambiente da Databricks Community. Esse arquivo possui compactado os seguintes notebooks:
+
+- include/exam: Arquivo com a implementação da classe `Exam` com os dados da pergunta. Serve como base para execução dos demais notebooks. A classe `Exam` do notebook foi implementada de forma semelhante a implementação da versão para prompt de comando desse simulado.
+- Exam1A: Arquivo com todas as perguntas do exame de forma ordenada, onde o usuário pode responder as perguntas e verificar sua quantidade de acertos.  
+- Exam1B: Exibe de forma aleatória 1 pergunta por vez. O usuário pode responder as perguntas e no final do exame verificar sua quantidade de acertos. Funciona de forma semelhante a versão para shell desse simulado.
 
 ### Versão para prompt de comando ou Shell
 
@@ -67,7 +77,7 @@ Na pasta src/python contém o código fonte para execução do simulado da prova
 ## Classe *Exam*
 
 A Classe é o que permite a execução do simulado.  
-Em temp ode execução ela apresenta 3 estados:
+Em tempo de execução ela apresenta 3 estados:
 
 - "I" (Init), quando o objeto da classe é criado.
 - "R" (Running), quando o teste é iniciado, `startExam()`
