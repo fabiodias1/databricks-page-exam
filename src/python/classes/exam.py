@@ -64,6 +64,7 @@ class Exam():
 
         self.__showedQuestion.append(int_q)
 
+        #print("Question ", self.__questions[int_q]["id"])
         print(self.__questions[int_q]["description"])
         print("\nOptions:\n")
         for int_i in range(5):
@@ -92,7 +93,7 @@ class Exam():
             print("Invalid option!")
             return False
 
-        int_q = len(self.__showedQuestion) - 1
+        int_q = self.__showedQuestion[::-1][0]
 
         self.__userAnswers.append(
             {"id": self.__questions[int_q]["id"], "answer":userAnswer}
