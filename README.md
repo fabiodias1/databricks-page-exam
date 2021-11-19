@@ -1,8 +1,6 @@
 # databricks-page-exam
 
-Repositório com o projeto de simulado da prova para certificação Databricks.
-
-Neste momento, somente a versão par ser usada no prompt ou shell está dispoinível.
+Projeto de simulado da prova para certificação Databricks.
 
 ## Tecnologias
 
@@ -40,8 +38,8 @@ Na pasta src/python contém o código fonte para execução do simulado da prova
 
 #### Arquivos da pasta src/python
 
-- classes/exam.py: Código do correspondente a classe que representa o teste
-- main.py: Arquivo que simula o teste.
+- classes/exam.py: Código correspondente a classe que representa o exame.
+- main.py: Arquivo que simula a aplicação do exame.
 - data/*: Arquivos de dados com as questões.
 
 #### Formatos de arquivos de dados
