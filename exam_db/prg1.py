@@ -49,6 +49,10 @@ for linha in f:
 	
 f.close()
 
+lst_options.append(str_a1)
+dct_temp["options"] = lst_options
+lst_questions.append( dct_temp.copy() )
+
 str_json = json.dumps({"questions": lst_questions}, indent=4)
 f = open("questoes_cert_spark.json", "wt")
 f.write(str_json)
