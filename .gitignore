@@ -1,6 +1,3 @@
-#Version WEB
-src/WEB
-
 #Python
 src/python/classes/__pycache__
 
