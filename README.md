@@ -42,6 +42,7 @@ As informações contidas nessa pasta alimentam as bases de dados usadas pelos s
 
  Os dados da prova foram extraídos do arquivo 'PracticeExam-DCADAS3-Python.pdf' salvo no Teams de estudo.
 
+ O simulado também está disponível em https://files.training.databricks.com/assessments/practice-exams/PracticeExam-DCADAS3-Python.pdf
 **src**
 
 A pasta `src` contém o código dos simuladores.
