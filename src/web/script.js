@@ -56,12 +56,14 @@ function handleBntTimer(obj_button) {
         user_answers = [];
         showMessageToUser("");
         document.querySelector("#form1").classList.add("formActive");
+        obj_button.innerHTML = "Stop Exam";
     } else { //Stop Exam
         obj_button.dataset.startExam = "0";
         startOrStopExam(false);
         obj_button.classList.remove("btn-stop-test");
         showQuestion(false);
         document.querySelector("#form1").classList.remove("formActive");
+        obj_button.innerHTML = "Start Exam";
     }
 }
 
