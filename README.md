@@ -5,8 +5,7 @@ Projeto de simulador da prova para certificação Databricks.
 ## Tecnologias
 
 * Python 3;
-* Notebooks Databricks;
-* HTML/CSS/JavaScript (demo).
+* Notebooks Databricks.
 
 ## Usuários
 
@@ -14,10 +13,9 @@ Para usar o programa é recomendado possuir conhecimentos básicos em Python 3, 
 
 ## Simuladores
 
-Este repositório possui 3 versões de simuladores:
+Este repositório possui 2 versões de simuladores:
 - Versão para ser executada no computador local com Python 3;
-- Versão em notebook para ser usada no ambiente Databricks Community;
-- Versão WEB (demo). 
+- Versão em notebook para ser usada no ambiente Databricks Community.
 
 ## Organização do Repositório
 
@@ -38,11 +36,13 @@ Na pasta `exam_db` contém:
 
 As informações contidas nessa pasta alimentam as bases de dados usadas pelos simuladores contidos neste repositório.  
 
- *Observação*
+ *Observações*
 
  Os dados da prova foram extraídos do arquivo 'PracticeExam-DCADAS3-Python.pdf' salvo no Teams de estudo.
 
- O simulado também está disponível em https://files.training.databricks.com/assessments/practice-exams/PracticeExam-DCADAS3-Python.pdf
+ O simulado também está disponível em https://files.training.databricks.com/assessments/practice-exams/PracticeExam-DCADAS3-Python.pdf  
+
+ 
 **src**
 
 A pasta `src` contém o código dos simuladores.
@@ -50,11 +50,6 @@ A pasta `src` contém o código dos simuladores.
 **notebooks**
 
 A sub-pasta com 2 arquivos referentes ao simulado, um arquivo Jupyter Notebook com 60 perguntas originárias das provas de certificação para consulta e outro arquivo no formato dbc.
-
-**web**
-
-Código fonte da versão Web do simulador. Necessário refatoramento do código.  
-
 
 **python**
 
@@ -190,8 +185,3 @@ Z|Interrompe o teste.
 
 - É necessário o refatoramento do código da classe atribuindo de forma coerente as responsabilidades dos métodos.
 - No Teams há um vídeo demonstrando o uso desse simulador em ambiente Windows e Linux.  
-
-### Versão WEB
-
-A versão do simulado ainda está em desenvolvimento.  
-Uma demo dessa versão pode ser acessada pela url https://fabiodias1.github.io/databricks-page-exam/src/web/
