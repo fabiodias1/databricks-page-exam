@@ -17,6 +17,8 @@ Este repositório possui 2 versões de simuladores:
 - Versão para ser executada no computador local com Python 3;
 - Versão em notebook para ser usada no ambiente Databricks Community.
 
+Ambos os simuladores, assim como na prova real, disponibilizam um conjunto de 60 questões em que o usuário precisa responder em 2 horas.  
+
 ## Organização do Repositório
 
 ![Organização do Repositório](doc/img1_repoDirs.svg)
@@ -32,15 +34,15 @@ Na pasta `exam_db` contém:
 
  - 1 arquivo de texto com as perguntas;
  - 1 arquivo de texto com as respostas (1 por linha);
- - 1 arquivo python que converte o conteúdo do arquivo com as questões no formato json e salva em um outro arquivo. Esse arquivo poderá ser usado para aplicação do simulado.
-
-As informações contidas nessa pasta alimentam as bases de dados usadas pelos simuladores contidos neste repositório.  
+ - 1 arquivo python que converte o conteúdo do arquivo com as questões no formato json e salva em um outro arquivo.
 
  *Observações*
 
- Os dados da prova foram extraídos do arquivo 'PracticeExam-DCADAS3-Python.pdf' salvo no Teams de estudo.
+- As informações contidas nessa pasta alimentam as bases de dados usadas pelos simuladores contidos neste repositório.  
 
- O simulado também está disponível em https://files.training.databricks.com/assessments/practice-exams/PracticeExam-DCADAS3-Python.pdf  
+- Os dados da prova foram extraídos do arquivo 'PracticeExam-DCADAS3-Python.pdf' salvo no Teams de estudo.
+
+- O simulado também está disponível em https://files.training.databricks.com/assessments/practice-exams/PracticeExam-DCADAS3-Python.pdf  
 
  
 **src**
@@ -58,11 +60,57 @@ Guarda o código fonte da versão local do simulador. Possui duas sub-pastas:
 - classes: Código da implementação da classe Exam.
 - data: Arquivos com os dados da prova. 1 arquivo json com as perguntas e 1 arquivo de texto com as respostas.
 
-## Simulados
+## Tratamento de dados
 
-Assim como na prova real, são um conjunto de 60 questões, o usuário precisa fazer a prova em 2 horas.  
+Como mencionado anteriormente, a pasta `exam_db` contém os dados do simulado.  
+O programa python 'prg1.py' salvo na pasta transforma um arquivo de texto com as perguntas do simulado no formato JSON.  
+Para o programa funcionar de modo adequado, o arquivo de texto de entrada precisa estar no seguinte formato:  
 
-### Versão Notebook do Databricks
+```txt
+Question 1
+Enunciado da questão 1
+A. Opção 1
+B. Opção 2
+C. Opção 3
+D. Opção 4
+E. Opção 5
+Question 2
+Enunciado 
+da questão 2
+A. Descrição da
+opção 1
+B. Opção 2
+C. Opção 3
+D. Opção 4
+E. Opção 5
+
+...
+```
+
+O arquivo de saída possui a seguinte estrutura:  
+
+```json
+{
+    "questions": [
+        {
+            "id": 1,
+            "options": [
+                "A. Opção 1",
+                "B. Opção 2",
+                "C. Opção 3",
+                "D. Opção 4",
+                "E. Opção 5"
+            ],
+            "description": "Enunciado da questão 1"
+        },
+    ]
+}
+```
+*Observações*
+
+- O arquivo de entrada 'questions_cert_spark.txt' salvo neste repositório está codificado no padrão 'charset: ANSI'. Isso pode gerar falhas de codificação para determinados caracteres, que podem ocasionar erros na leitura dos dados pelos simuladores.
+
+## Simulador: Versão Notebook do Databricks
 
 Na pasta `src/notebooks` existem 2 arquivos referentes ao simulado, um arquivo Jupyter Notebook com 60 perguntas e outro arquivo no formato dbc.
 
@@ -72,9 +120,9 @@ O arquivo dbc  pode ser importado no ambiente da Databricks Community. Esse arqu
 - Exam1A: Arquivo com todas as perguntas do exame de forma ordenada, onde o usuário pode responder as perguntas e verificar sua quantidade de acertos.  
 - Exam1B: Exibe de forma aleatória 1 pergunta por vez. O usuário pode responder as perguntas e no final do exame verificar sua quantidade de acertos. Funciona de forma semelhante a versão para shell desse simulado.
 
-#### Classe Exam
+### Classe Exam
 
-**Estados**
+#### **Estados**
 
 ![Estados da Classe Exam](doc/img2_ExamStates.svg)
 
@@ -84,7 +132,7 @@ Em tempo de execução a classe apresenta 3 estados:
 - "R" (Running), quando o teste é iniciado, `startExam()`
 - "F" (Finished), quando o teste é finalizado, `stopExam()`
 
-**Métodos**
+#### **Métodos**
 
 Método|Argumentos|Descrição
 ------|----------|------------
@@ -106,17 +154,17 @@ getAnswers()|N/A|Devolve uma listas com as alternativas corretas para as questõ
  - No Teams há um vídeo de como usar os notebooks.
  - É necessário o refatoramento do código da classe atribuindo de forma coerente as responsabilidades dos métodos.
 
-### Versão para prompt de comando ou Shell
+## Simulador: Versão para prompt de comando ou Shell
 
-Na pasta src/python contém o código fonte para execução do simulado da prova localmente usando da python 3 no prompt de comando ou shell do sistema operacional.
+Na pasta `src/python` contém o código fonte para execução do simulado da prova localmente usando da python 3 no prompt de comando ou shell do sistema operacional.
 
-#### Arquivos da pasta src/python
+### Arquivos da pasta src/python
 
 - classes/exam.py: Código correspondente a classe que representa o exame.
 - main.py: Arquivo que simula a aplicação do exame.
 - data/*: Arquivos de dados com as questões.
 
-#### Formatos de arquivos de dados
+### Formatos de arquivos de dados
 
 **Arquivo com as questões**
 
@@ -146,9 +194,9 @@ Na pasta src/python contém o código fonte para execução do simulado da prova
 ...
 ```
 
-#### Classe *Exam*
+### Classe *Exam*
 
-**Estados**
+#### **Estados**
 
 A Classe **Exam** é o que permite a execução do simulado.  
 Em tempo de execução ela apresenta 3 estados:
@@ -159,7 +207,7 @@ Em tempo de execução ela apresenta 3 estados:
 
 ![Estados da Classe Exam](doc/img2_ExamStates.svg)
 
-**Métodos**
+#### **Métodos**
 
 Método|Argumentos|Descrição
 ------|----------|------------
@@ -177,8 +225,8 @@ loadQuestionsData(arq1, arq2)|String. arq1 e arq2|Método que recebe a localiza�
 
 Entrada|Ação
 -------|-----
-A-E|Armazena a entrada pois refere-se a opção da prova escolhida pelo usuário
-Z|Interrompe o teste.
+'A', 'B', 'C', 'D' ou 'E'|Armazena a entrada pois refere-se a opção da prova escolhida pelo usuário
+'Z'|Interrompe o exame.
 
 
 *Observações*
