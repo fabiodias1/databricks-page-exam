@@ -5,7 +5,7 @@ class Exam():
     __answers = []
     __status = "I"
     __userAnswers = []
-    __showedQuestion = []
+    __showedQuestions = []
     __DateTimeStart = None
 
     ##Methods
@@ -21,25 +21,12 @@ class Exam():
     def cleanScreen(self):
         from os import name, system
 
-        if name.lower() == "nt":
+        if name.lower() == "nt": #Windows
             system("cls")
         else:
             system("clear")
 
-
-    def startExam(self):
-        import datetime
-
-        self.__DateTimeStart = datetime.datetime.now()
-        self.setStatus("R")
-        self.cleanScreen()
-        self.printQuestion()
-
-
-    def stopExam(self):
-
-        self.setStatus("F")
-
+    def checkUserHits(self):
         userHits = []
         userTotalHits = 0
 
@@ -51,29 +38,30 @@ class Exam():
 
         print("Your total hits:", userTotalHits)
 
-
-    def printQuestion(self):
+    def chooseQuenstion(self):
         import random
 
         ##Choise question
         while True:
             int_q = random.randint(0, len(self.__questions) -1 )
 
-            if len(self.__showedQuestion) == 0 or int_q not in self.__showedQuestion:
+            if len(self.__showedQuestions) == 0 or int_q not in self.__showedQuestions:
                 break
 
-        self.__showedQuestion.append(int_q)
+        return int_q
 
+    def printQuestion(self, int_question):
+        
+        self.__showedQuestions.append(int_question)
         #print("Question ", self.__questions[int_q]["id"])
-        print(self.__questions[int_q]["description"])
+        print(self.__questions[int_question]["description"])
         print("\nOptions:\n")
         for int_i in range(5):
-             print(self.__questions[int_q]["options"][int_i])
+             print(self.__questions[int_question]["options"][int_i])
 
-        print("\nType de letter of chose option or type 'Z' to finish the test")
+        print("\nType de letter of chose option or type 'Z' to finish the test.\nOnly first character of the input is processed.")
 
-
-    def checkUserAnswer(self, userAnswer):
+    def checkTimeIsOver(self):
         import datetime
 
         obj_DateTime = datetime.datetime.now()
@@ -81,19 +69,41 @@ class Exam():
         obj_DiffDateTimes = obj_DateTime - self.__DateTimeStart
 
         if  (obj_DiffDateTimes.total_seconds() / 3600) > 2.0:
+            return True
+        
+        return False
+
+    def startExam(self):
+        import datetime
+
+        self.__DateTimeStart = datetime.datetime.now()
+        self.setStatus("R")
+
+    def stopExam(self):
+        self.setStatus("F")
+        self.checkUserHits()
+
+    def showNextQuestion(self):
+        self.cleanScreen()
+        int_q = self.chooseQuenstion()
+        self.printQuestion(int_q)
+    
+    def processUserAnswer(self, userAnswer):
+
+        if self.checkTimeIsOver() == True:
             print("Our time is over!")
             self.stopExam()
-            return True
+            return 
 
         if userAnswer.upper() == "Z":
             self.stopExam()
-            return True
+            return 
 
         if  userAnswer.upper() not in ("A", "B", "C", "D", "E"):
-            print("Invalid option!")
-            return False
+            print("Invalid option!\nType A, B, C, D, E or Z character.")
+            return 
 
-        int_q = self.__showedQuestion[::-1][0]
+        int_q = self.__showedQuestions[::-1][0]
 
         self.__userAnswers.append(
             {"id": self.__questions[int_q]["id"], "answer":userAnswer}
@@ -102,12 +112,7 @@ class Exam():
         if len( self.__userAnswers) == len(self.__questions):
             print("You answered all of questions!")
             self.stopExam()
-            return True
-
-        self.cleanScreen()
-        self.printQuestion()
-
-        return True
+            return 
 
     def loadQuestionsData(self, str_question_data_location, str_answers_data_location):
         import json

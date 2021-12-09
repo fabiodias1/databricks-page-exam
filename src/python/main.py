@@ -6,21 +6,20 @@ objExam = Exam()
 
 objExam.loadQuestionsData("./data/questions_data.json", "./data/answers.txt")
 
-str_input = ""
+str_input = "A"
 
 objExam.startExam()
 
 while objExam.getStatus() != "F":
 
-    bolR = False
+    if str_input.upper() in ("A", "B", "C", "D", "E"):
+        objExam.showNextQuestion()
 
-    while bolR == False:
+    str_input = input("")
 
-        str_input = input("")
+    str_input = str_input[0]
 
-        str_input = str_input[0]
-
-        bolR = objExam.checkUserAnswer(str_input)
+    objExam.processUserAnswer(str_input)
 
 
 
