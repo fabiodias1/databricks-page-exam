@@ -214,10 +214,14 @@ Método|Argumentos|Descrição
 getStatus()|N/A|Devolve o estado da classe.
 setStatus(estado)|String. Letra que indica o estado|Método que altera o estado da aplicação.
 cleanScreen()|N/A|Limpa o texto da tela de prompt de comando.
+printQuestion(posicaoQuestao)|Inteiro. Posição da questão na lista de questões|Imprime uma questão da prova escolhida aleatóriamente.
+checkUserHits()|N/A|Calcula e mostra o total de acertos do usuário.
+chooseQuenstion()|N/A|Escolhe uma pergunta na lista de questões aleatóriamente devolvendo a posição da pergunta na lista.
+checkTimeIsOver()|N/A|Verifica se o tempo para prova acabou. Devolve True caso o tempo tenha acabado e False caso não tenha.
 startExam()|N/A|Inicia o exame (prova).
 stopExam()|N/A|Para o exame(prova). Mostra em tela o desempenho do usuário.
-printQuestion()|N/A|Imprime uma questão da prova escolhida aleatóriamente.
-checkUserAnswer(resposta)|String. Letra referente a resposta da prova ou a desistência do usuário.|Valida a resposta do usuário, acionando as ações apropriadas de acordo com a resposta recebida.  
+showNextQuestion()|N/A|Exibe a próxima pergunta na tela.
+processUserAnswer(resposta)|String. Letra referente a resposta da prova ou a desistência do usuário.|Valida a resposta do usuário, acionando as devidas ações de acordo com a entrada recebida.
 loadQuestionsData(arq1, arq2)|String. arq1 e arq2|Método que recebe a localização do arquivo com os dados da perguntas, 'arq1' e o arquivo com os dados das respostas, 'arq2', e salva esse dados nos atributos '__questions' e '__answers'.
 
 
